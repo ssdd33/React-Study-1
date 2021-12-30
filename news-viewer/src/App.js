@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-const url = 'https://baconipsum.com/api/?type=meat-and-filler';
-const url1 = 'https://jsonplaceholder.typicode.com/todo/1';
+const testUrl = 'https://baconipsum.com/api/?type=meat-and-filler';
+const newsUrl = `https://newsapi.org/v2/top-headlines?country=kr&apiKey=${process.env.REACT_APP_API_KEY}`;
+const getNewsByCategory = (category) => {
+  return `https://newsapi.org/v2/top-headlines?country=kr&category=${category}&apiKey=${process.env.REACT_APP_API_KEY}`;
+};
 function App() {
-  const [data, setDate] = useState(null);
-  const onClick = () => {
-    axios.get(url).then((res) => {
-      setDate(res.data);
-    });
+  const apikey = process.env.REACT_APP_API_KEY;
+  console.log(apikey);
+  const [data, setData] = useState(null);
+  const onClick = async () => {
+    try {
+      const response = await axios.get(newsUrl);
+      setData(response.data);
+    } catch (e) {
+      console.log(e);
+    }
   };
   return (
     <div>
