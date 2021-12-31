@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function NewsItem({ urlToImage, url, title, desc }) {
+export default function NewsItem({
+  article: { urlToImage, url, title, desc },
+}) {
   return (
     <NewsItemBlock>
       {urlToImage && (
