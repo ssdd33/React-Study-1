@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 export default function NewsItem({
-  article: { urlToImage, url, title, desc },
+  article: { urlToImage, url, title, description },
 }) {
   return (
     <NewsItemBlock>
@@ -19,7 +19,7 @@ export default function NewsItem({
             {title}
           </a>
         </Title>
-        <Desc>{desc}</Desc>
+        <Desc>{description}</Desc>
       </Contents>
     </NewsItemBlock>
   );
@@ -27,6 +27,10 @@ export default function NewsItem({
 
 const NewsItemBlock = styled.div`
   display: flex;
+  & + & {
+    border-bottom: black solid 1px;
+    margin-top: 1rem;
+  }
 `;
 const Thumbnail = styled.div`
   margin-right: 1rem;

@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 
 export default function NewsPage() {
   const category = useParams().category || 'all';
+  console.log(category);
 
   return (
     <>

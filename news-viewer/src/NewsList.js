@@ -25,6 +25,7 @@ export default function NewsList({ category }) {
       setLoading(false);
     };
     fetchData();
+    console.log(articles);
   }, [category]);
   return (
     <>

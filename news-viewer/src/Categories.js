@@ -1,6 +1,6 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
-
+import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 const categories = [
   { name: 'all', text: '전체보기' },
   { name: 'business', text: '비지니스' },
@@ -11,14 +11,15 @@ const categories = [
   { name: 'technology', text: '기술' },
 ];
 
-export default function Categories({ onSelect, selectedCategory }) {
+export default function Categories({}) {
   return (
     <CategoriesBlock>
       {categories.map((category) => (
         <Category
           key={category.name}
-          onClick={() => onSelect(category.name)}
-          active={category.name === selectedCategory}
+          className={({ isActive }) => (isActive ? 'active' : undefined)}
+          exact={category.name === 'all'}
+          to={category.name === 'all' ? '/' : `/${category.name}`}
         >
           {category.text}
         </Category>
@@ -37,7 +38,7 @@ const CategoriesBlock = styled.div`
     overflow-x: auto;
   }
 `;
-const Category = styled.div`
+const Category = styled(NavLink)`
   font-size: 1.125rem;
   cursor: pointer;
   white-space: pre;
@@ -50,14 +51,12 @@ const Category = styled.div`
   & + & {
     margin-left: 1rem;
   }
-  ${(props) =>
-    props.active &&
-    css`
-      font-weight: 600;
-      border-bottom: 2px solid #22b8cf;
-      color: #22b8cf;
-      &:hover {
-        color: #3bc9db;
-      }
-    `}
+  &.active {
+    font-weight: 600;
+    border-bottom: 2px solid #22b8cf;
+    color: #22b8cf;
+    &:hover {
+      color: #3bc9db;
+    }
+  }
 `;
