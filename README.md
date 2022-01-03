@@ -6,6 +6,6 @@ ___________________________________
 #### [14장 외부 API를 연동하여 뉴스 뷰어 만들기](https://github.com/ssdd33/React_practice/tree/master/news-viewer)
 #### [15장 Context API](https://github.com/ssdd33/React_practice/tree/master/context-tutorial)
 #### [16장 리덕스 라이브러리 이해하기](https://github.com/ssdd33/React_practice/tree/master/vanilla-redux)
-#### [17장 리덕스를 사용하여 리액트 애플리케이션 상태 관리하기]()
+#### [17장 리덕스를 사용하여 리액트 애플리케이션 상태 관리하기](https://github.com/ssdd33/React_practice/tree/master/react-redux-tutorial)
 #### [18장 리덕스 미들웨어를 통한 비동기 작업 관리]()
 #### [19장 코드 스플리팅]()
