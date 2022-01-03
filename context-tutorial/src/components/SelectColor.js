@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import colorContext from "../contexts/color";
 const colors = ["red", "orange", "yellow", "green", "blue", "indigo", "purple"];
+/* static contextType을 정의하면 class 메서드에서도 context에 넣어 둔 함수를 호출할 수 있다. 
+단, 하나의 class에서 하나의 context만 사용할 수 있다.*/
 export default class SelectColor extends Component {
   static contextType = colorContext;
   handleSetColor = (color) => {
