@@ -18,7 +18,7 @@ export default function Categories({}) {
         <Category
           key={category.name}
           className={({ isActive }) => (isActive ? 'active' : undefined)}
-          exact={category.name === 'all'}
+          exact={`${category.name === 'all'}`}
           to={category.name === 'all' ? '/' : `/${category.name}`}
         >
           {category.text}

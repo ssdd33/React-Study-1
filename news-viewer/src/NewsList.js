@@ -2,44 +2,38 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import NewsItem from './NewsItem';
 import axios from 'axios';
+import usePromise from './lib/usePromise';
 
 const getNewsByCategory = (category) => {
   if (category === 'all') {
-    return `https://newsapi.org/v2/top-headlines?country=kr&apiKey=${process.env.REACT_APP_API_KEY}`;
+    return axios.get(
+      `https://newsapi.org/v2/top-headlines?country=kr&apiKey=${process.env.REACT_APP_API_KEY}`,
+    );
   }
-  return `https://newsapi.org/v2/top-headlines?country=kr&category=${category}&apiKey=${process.env.REACT_APP_API_KEY}`;
+  return axios.get(
+    `https://newsapi.org/v2/top-headlines?country=kr&category=${category}&apiKey=${process.env.REACT_APP_API_KEY}`,
+  );
 };
 export default function NewsList({ category }) {
-  const [articles, setArticles] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const { loading, resolved } = usePromise(getNewsByCategory(category), [
+    category,
+  ]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await axios.get(getNewsByCategory(category));
-        setArticles(response.data.articles);
-      } catch (e) {
-        console.log(e);
-      }
-      setLoading(false);
-    };
-    fetchData();
-    console.log(articles);
-  }, [category]);
-  return (
-    <>
-      {loading ? (
-        <NewsListBlock>로딩 중...</NewsListBlock>
-      ) : articles ? (
-        <NewsListBlock>
-          {articles.map((article) => (
-            <NewsItem key={article.url} article={article} />
-          ))}
-        </NewsListBlock>
-      ) : null}
-    </>
-  );
+  if (loading) {
+    return <NewsListBlock>로딩 중...</NewsListBlock>;
+  }
+  if (!resolved) {
+    return null;
+  }
+  if (resolved) {
+    return (
+      <NewsListBlock>
+        {resolved.data.map((article) => (
+          <NewsItem key={article.url} article={article} />
+        ))}
+      </NewsListBlock>
+    );
+  }
 }
 
 const NewsListBlock = styled.div`
